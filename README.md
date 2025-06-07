@@ -85,22 +85,6 @@ python main.py
 └── requirements.txt   # Dependências
 ```
 
-## 🔄 Deploy no Google Cloud
-
-1. Crie um arquivo `app.yaml`:
-```yaml
-runtime: python39
-entrypoint: python main.py
-
-env_variables:
-  SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/SEU/WEBHOOK/URL"
-```
-
-2. Faça o deploy:
-```bash
-gcloud app deploy
-```
-
 ## 📝 Logs e Monitoramento
 
 - Logs são exibidos no console com timestamp e nível
