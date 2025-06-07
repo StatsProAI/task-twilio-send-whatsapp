@@ -83,14 +83,14 @@ def process_user(user: User) -> tuple[bool, str]:
         return False, f"Usuário {user.first_name} não possui número de telefone válido"
 
     try:
-        # send_message_with_template(
-        #     content_sid=TWILIO_CONTENT_SID,
-        #     phone_number=user.phone_number,
-        #     content={
-        #         "name": user.first_name,
-        #         "email": user.email
-        #     }
-        # )
+        send_message_with_template(
+            content_sid=TWILIO_CONTENT_SID,
+            phone_number=user.phone_number,
+            content={
+                "name": user.first_name,
+                "email": user.email
+            }
+        )
         return True, None
     except Exception as e:
         return False, str(e)

@@ -6,19 +6,20 @@ from dotenv import load_dotenv
 
 def get_bigquery_client():
     """
-    Cria e retorna um cliente do BigQuery usando as credenciais do .env
+    Cria e retorna um cliente do BigQuery usando as credenciais do arquivo JSON
     """
     # Carrega variáveis do .env
     load_dotenv()
-    credentials_json = os.getenv("GOOGLE_CREDENTIALS")
+    
+    # Caminho para o arquivo de credenciais
+    credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
     dataset_id = os.getenv("BIGQUERY_DATASET_ID")
 
-    if not credentials_json or not dataset_id:
-        raise ValueError("BIGQUERY_DATASET_ID ou GOOGLE_CREDENTIALS não encontrados no .env")
+    if not credentials_path or not dataset_id:
+        raise ValueError("GOOGLE_APPLICATION_CREDENTIALS ou BIGQUERY_DATASET_ID não encontrados no .env")
 
-    # Cria cliente BigQuery usando as credenciais do env
-    credentials_dict = json.loads(credentials_json)
-    client = bigquery.Client.from_service_account_info(credentials_dict)
+    # Cria cliente BigQuery usando o arquivo de credenciais
+    client = bigquery.Client.from_service_account_json(credentials_path)
     
     return client
 
